@@ -1,0 +1,54 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link href="starfield.css" rel="stylesheet">
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.18.5/TweenMax.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.18.5/TimelineMax.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.18.5/easing/EasePack.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.18.5/plugins/CSSPlugin.min.js"></script>
+</head>
+<body>
+
+<script>
+var tl1 = new TimelineMax();
+var tl2 = new TimelineMax();
+$(document).ready( function() {
+	TweenMax.to($('#bg1'), 9, {css:{backgroundPosition: "-314 0px"}, repeat:-1, ease:Linear.easeNone});
+	TweenMax.to($('#bg2'), 18, {css:{backgroundPosition: "-269 30px"}, repeat:-1, ease:Linear.easeNone});
+	TweenMax.to($('#ufo'), 0.2, {css:{backgroundPosition :"340 0px"}, ease:SteppedEase.config(4), repeat:-1});
+	
+	tl1 = new TimelineMax();
+	tl1.append( TweenMax.fromTo($('#ufo'), 2, {css:{autoAlpha :0}}, {css:{autoAlpha :1}}));
+	tl1.append( TweenMax.fromTo($('#ufo'), 4, {css:{left:"80px"}}, {css:{left:"500px"}}), 0 );
+	tl1.pause();
+	
+	tl2 = new TimelineMax();
+	tl2.insert( TweenMax.fromTo($('#ufo'), 2, {css:{autoAlpha :0}}, {css:{autoAlpha :1}}));
+	tl2.insert( TweenMax.fromTo($('#ufo'), 4, {css:{left:"80px"}}, {css:{left:"500px"}}), 0 );
+	tl2.pause();
+});
+
+function playSample1(btn){
+	$('#ufo').css('left', '80px');
+	tl1.restart();
+}
+
+function playSample2(btn){
+	tl2.restart();
+}
+
+</script>
+
+
+<div class="starfield" id="sample">
+	<div class="stars" id="bg1"></div>
+	<div class="stars" id="bg2" style="background-position: 20 30px"></div>
+	<span class="ufo" id="ufo" style="opacity:0"></span>
+	<div class="controls">
+		<input type="button" value="Play 1" onclick="playSample1(this)">
+		<input type="button" value="Play 2" onclick="playSample2(this)">
+	</div>
+</div>
+</body>
+</html>
